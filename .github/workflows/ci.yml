@@ -8,6 +8,7 @@ on:
       - master
 jobs:
   test:
+    timeout-minutes: 30
     name: Test go${{ matrix.goVersion}}.x ${{ matrix.goArch }}
     strategy:
       fail-fast: false
@@ -54,6 +55,7 @@ jobs:
           SKIP_PYTHON_BINDINGS_TESTS: ${{ matrix.SKIP_PYTHON_BINDINGS_TESTS }}
 
   bazel:
+    timeout-minutes: 30
     name: bazel test
     runs-on: ubuntu-latest
     steps:
@@ -68,6 +70,7 @@ jobs:
       - run: bazel test //...
 
   all:
+    timeout-minutes: 30
     name: Check all
     runs-on: ubuntu-latest
     steps:
@@ -91,6 +94,7 @@ jobs:
         run: ./bin/goveralls -coverprofile=coverage.out -service=github
 
   goreleaser:
+    timeout-minutes: 30
     name: Goreleaser
     runs-on: ubuntu-latest
     steps:
